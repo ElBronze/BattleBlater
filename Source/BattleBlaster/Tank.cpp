@@ -6,6 +6,7 @@
 #include "Camera/CameraComponent.h"
 #include "InputMappingContext.h"
 #include "Kismet/GameplayStatics.h"
+#include "DrawDebugHelpers.h"
 
 ATank::ATank()
 {
@@ -41,6 +42,17 @@ void ATank::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	APlayerController* PlayerController = Cast<APlayerController>(GetController());
+
+	if (PlayerController)
+	{
+		FHitResult HitResult;
+		PlayerController->GetHitResultUnderCursor(ECC_Visibility, false, HitResult); // ECC_Visibility means we want to trace against objects that are visible
+		RotateTurret(HitResult.ImpactPoint);
+
+		//DrawDebugSphere(GetWorld(), HitResult.ImpactPoint, 30.0f, 12, FColor::Blue, false);
+
+	}
 }
 
 // Called to bind functionality to input
