@@ -64,6 +64,7 @@ void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 	{
 		EnhancedInput->BindAction(MoveAction, ETriggerEvent::Triggered, this, &ATank::MoveInput);
 		EnhancedInput->BindAction(TurnAction, ETriggerEvent::Triggered, this, &ATank::TurnInput);
+		EnhancedInput->BindAction(FireAction, ETriggerEvent::Started, this, &ATank::Fire);
 	}
 }
 
@@ -88,3 +89,5 @@ void ATank::TurnInput(const FInputActionValue& Value)
 
 	AddActorLocalRotation(DeltaRotation, true);
 }
+
+
