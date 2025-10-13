@@ -38,9 +38,7 @@ void ABasePawn::Fire()
 	
 	FRotator SpawnRotation = ProjectileSpawnPoint->GetComponentRotation();
 
-	DrawDebugSphere(GetWorld(), SpawnLocation, 20.0f, 12, FColor::Red, false, 3.0f);
-
-	UE_LOG(LogTemp, Warning, TEXT("Fire!"));
+	GetWorld()->SpawnActor<AProjectile>(ProjectileClass, SpawnLocation, SpawnRotation);
 }
 
 
