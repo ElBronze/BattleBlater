@@ -26,5 +26,4 @@ public:
 	
 	UPROPERTY(VisibleAnywhere)
 	UStaticMeshComponent* Projectile;
-
 };
