@@ -38,7 +38,13 @@ void ABasePawn::Fire()
 	
 	FRotator SpawnRotation = ProjectileSpawnPoint->GetComponentRotation();
 
-	GetWorld()->SpawnActor<AProjectile>(ProjectileClass, SpawnLocation, SpawnRotation);
+	AProjectile* Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileClass, SpawnLocation, SpawnRotation);
+
+	if (Projectile)
+	{
+		Projectile->SetOwner(this);		// This es una instancia de la clase
+
+	}
 }
 
 
