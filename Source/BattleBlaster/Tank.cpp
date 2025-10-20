@@ -36,6 +36,8 @@ void ATank::BeginPlay()
 			}
 		}
 	}
+
+	SetPlayerEnable(false);
 }
 
 // Called every frame

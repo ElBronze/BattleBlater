@@ -14,8 +14,11 @@ AProjectile::AProjectile()
 	SetRootComponent(Projectile);
 
 	ProjectileMovement = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("ProjectileMovementComponent"));
-	//ProjectileMovement->InitialSpeed = 1500.0f;
-	//ProjectileMovement->MaxSpeed = 1500.0f;
+	ProjectileMovement->InitialSpeed = 1500.0f;
+	ProjectileMovement->MaxSpeed = 1500.0f;
+
+	TrailParticles = CreateDefaultSubobject<UNiagaraComponent>(TEXT("TrailParticles"));
+	TrailParticles->SetupAttachment(RootComponent);
 
 }
 
@@ -42,6 +45,11 @@ void AProjectile::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, U
 		if (OtherActor && OtherActor != MyOwner && OtherActor != this)
 		{
 			UGameplayStatics::ApplyDamage(OtherActor, Damage, MyOwner->GetInstigatorController(), this, UDamageType::StaticClass());
+
+			if (HitParticles)
+			{
+				UNiagaraFunctionLibrary::SpawnSystemAtLocation(GetWorld(), HitParticles, GetActorLocation(), GetActorRotation());
+			}
 		}
 	}
 
